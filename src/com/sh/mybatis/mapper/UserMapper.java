@@ -15,6 +15,7 @@ public interface UserMapper {
 	//命名空间绑定此接口
 	public User findUserById(Integer id);
 	
+	//通过包装类查询用户
 	public List<User> findUserByQueryVo(QueryVo vo);
 	
 	//查询数据条数

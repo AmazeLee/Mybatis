@@ -1,7 +1,5 @@
 package com.sh.mybatis.junit;
 
-import static org.junit.Assert.*;
-
 import java.io.InputStream;
 import java.util.Date;
 import java.util.List;

@@ -36,4 +36,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<delete id="deleteUserById" parameterType="Integer">
 		delete from user where id = #{v}
 	</delete>
+	
+	<!-- 根据用户名模糊查询 -->
+	<select id="findUserByQueryVo" parameterType="QueryVo" resultType="com.sh.mybatis.pojo.User">
+		select * from user where username like  "%"#{user.username}"%"
+	</select>
+	
+	<!-- 查询数据条数 -->
+	<select id="countUser" resultType="Integer">
+		select count(1) from user
+	</select>
 </mapper>

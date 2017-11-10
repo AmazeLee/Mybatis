@@ -51,8 +51,10 @@ public class UserMapperTest {
 		UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
 		
 		QueryVo vo = new QueryVo();
+		//设置User条件
 		User user = new User();
 		user.setUsername("五");
+		//设置到包装对象中
 		vo.setUser(user);
 		
 		List<User> users = userMapper.findUserByQueryVo(vo);
@@ -62,7 +64,7 @@ public class UserMapperTest {
 	}
 	
 	@Test
-	public void testUserMapperQueryVoCount() throws Exception {
+	public void testUserMapperQueryCount() throws Exception {
 		// 1.加载核心配置文件
 		String resource = "sqlMapConfig.xml";
 		InputStream is = Resources.getResourceAsStream(resource);

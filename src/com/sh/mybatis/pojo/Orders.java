@@ -18,6 +18,9 @@ public class Orders  implements Serializable{
     private Date createtime;
 
     private String note;
+    
+    //附加对象 用户对象
+    private User user;
 
     public Integer getId() {
         return id;
@@ -59,10 +62,21 @@ public class Orders  implements Serializable{
         this.note = note == null ? null : note.trim();
     }
 
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Orders [id=" + id + ", userId=" + userId + ", number=" + number + ", createtime=" + createtime
-				+ ", note=" + note + "]";
+				+ ", note=" + note + ", user=" + user + "]";
 	}
-    
+
+	
+
+	
 }

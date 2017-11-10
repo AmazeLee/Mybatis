@@ -4,11 +4,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- namespace：命名空间，用于隔离sql，还有一个很重要的作用，后面会讲 -->
 <mapper namespace="com.sh.mybatis.mapper.OrderMapper">
-	
+
 	<resultMap type="Orders" id="orders">
-		<result column="user_id" property="userId"/>
+		<result column="user_id" property="userId" />
 	</resultMap>
 	<select id="selectOrdersList" resultMap="orders">
-		select id,user_id,number,createtime,note from orders
+		select
+		id,user_id,number,createtime,note from orders
+	</select>
+
+
+	<!-- 一对一关联查询 以订单为中心 关联用户 -->
+	<resultMap type="Orders" id="order">
+		<result column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="number" property="number" />
+		<!-- 一对一 -->
+		<association property="user" javaType="User">
+			<result column="username" property="username" />
+		</association>
+	</resultMap>
+	<select id="selectOrders" resultMap="order">
+		select
+		o.id,o.user_id,o.number,o.createtime,u.username
+		from orders o left join
+		user u on o.user_id = u.id
+	</select>
+
+	<!-- 一对多关联 -->
+	<resultMap type="User" id="user">
+		<id column="user_id" property="id" />
+		<result column="username" property="username" />
+		<!-- 一对多 -->
+		<collection property="orderList" ofType="Orders">
+			<id column="id" property="id" />
+			<result column="number" property="number" />
+		</collection>
+	</resultMap>
+	<select id="selectUserList" resultMap="user">
+		select
+		o.id,o.user_id,o.number,o.createtime,u.username
+		from user u left join
+		orders o on o.user_id = u.id
 	</select>
 </mapper>
